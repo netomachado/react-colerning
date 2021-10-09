@@ -1,0 +1,29 @@
+.form{
+    padding: 20px 10px;
+    display: flex;
+}
+
+.username-input{
+    padding: 5px 10px;
+    width: 100%;
+    border-radius: 4px 0 0 4px;
+    border: solid 1px gray
+}
+
+.search-button{
+    border-radius: 0 4px 4px 0;
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.search-button:hover{
+    filter: opacity(.8);
+}
+
+.profile-pic{
+    width: 50%;
+
+}
