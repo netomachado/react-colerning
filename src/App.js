@@ -1,7 +1,8 @@
-import SearchBar from "./components/SearchBar";
+
+import Home from "./pages/Home";
 
 function App() {
-  return <SearchBar />;
+  return <Home />;
 }
 
 export default App;

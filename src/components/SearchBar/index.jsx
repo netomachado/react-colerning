@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./styles.css";
 import axios from "axios";
+import UserInfo from '../UserInfo';
+import UserList from '../UserList';
 
 
 function SearchBar(){
@@ -10,7 +12,7 @@ function SearchBar(){
     const diminuidor = () => setContador(contador - 1);
 
     const [ username, setUsername ]= useState("")
-    const [ user, setUser ] = useState({});
+    const [ users, setUsers ] = useState([]);
 
     function handleInputChange (event){
         setUsername(event.target.value)
@@ -18,7 +20,8 @@ function SearchBar(){
     async function handleSubmit(event){
         event.preventDefault();
         const { data: githubUser } = await axios.get(`https://api.github.com/users/${username}`);
-        setUser(githubUser);
+        setUsers([ ...users, githubUser ]);
+        setUsername('');
     }
 
     return (
@@ -29,18 +32,18 @@ function SearchBar(){
                 placeholder="Digite seu usuario do github" 
                 className="username-input"
                 onChange={handleInputChange}
+                value={username}
                 />
                 <button className="search-button">Buscar</button>
             </form>
             <br/>
             <br/>
-            {Object.entries(user).length && (
-                <>
-                    <h1>{user.login}</h1>
-                    <span>Followers: {user.followers}</span>
-                    <span>Following: {user.following}</span>
-                    <img className="profile-pic" src={user.avatar_url} alt="Profile Pic" />
-                </>
+            {!!(users.length) && (
+                <UserList >
+                {users.map((user, idx) =>
+                <UserInfo key={idx}user={user}/>)}
+                </UserList>
+           
             )}
             <br/>
             <br/>
